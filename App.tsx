@@ -12,21 +12,32 @@ import { INITIAL_PORTFOLIO } from './constants';
 
 const App: React.FC = () => {
   const [isAdminMode, setIsAdminMode] = useState(false);
-  const [portfolios, setPortfolios] = useState<PortfolioItem[]>([]);
+  // 초기 상태를 빈 배열이 아닌 INITIAL_PORTFOLIO로 설정하여 로딩 시 빈 화면 방지
+  const [portfolios, setPortfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
 
   useEffect(() => {
-    const saved = localStorage.getItem('treebox_portfolio');
-    if (saved) {
-      setPortfolios(JSON.parse(saved));
-    } else {
-      setPortfolios(INITIAL_PORTFOLIO);
-      localStorage.setItem('treebox_portfolio', JSON.stringify(INITIAL_PORTFOLIO));
+    try {
+      const saved = localStorage.getItem('treebox_portfolio');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setPortfolios(parsed);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load portfolios from storage:', error);
+      // 로드 실패 시 초기 데이터 유지
     }
   }, []);
 
   const updatePortfolios = (newPortfolios: PortfolioItem[]) => {
     setPortfolios(newPortfolios);
-    localStorage.setItem('treebox_portfolio', JSON.stringify(newPortfolios));
+    try {
+      localStorage.setItem('treebox_portfolio', JSON.stringify(newPortfolios));
+    } catch (error) {
+      console.error('Storage limit exceeded. Data might not be saved permanently.', error);
+      alert('이미지 용량이 너무 커서 브라우저 저장이 불가능합니다. 저용량 이미지를 사용해 주세요.');
+    }
   };
 
   return (

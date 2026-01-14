@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
               </div>
               <div className="group cursor-pointer">
                 <h4 className="text-[10px] font-bold text-forest/20 tracking-[0.3em] uppercase mb-4">Seoul Arch-Viz HQ</h4>
-                <p className="text-lg font-medium text-charcoal/80">서울특별시 강서구 강서로 385 <br /> 우성에스비타워 1005호</p>
+                <p className="text-lg font-medium text-charcoal/80">서울특별시 강서구</p>
               </div>
             </div>
           </div>
