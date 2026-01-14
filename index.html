@@ -8,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <script>
-        tailwind.config = {
+        // Tailwind Configuration
+        window.tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -18,21 +19,19 @@
                         charcoal: '#333333',
                     },
                     fontFamily: {
-                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'],
-                        serif: ['Pretendard', 'serif'],
-                    },
-                    animation: {
-                        'box-open': 'boxOpen 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-                    },
-                    keyframes: {
-                        boxOpen: {
-                            '0%': { transform: 'translateY(0)' },
-                            '100%': { transform: 'translateY(-100%)' }
-                        }
+                        sans: ['Pretendard', 'system-ui', 'sans-serif'],
                     }
                 }
             }
-        }
+        };
+
+        // Error tracking for deployment debugging
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error('Global Error:', message, 'at', source, ':', lineno);
+        };
+        window.onunhandledrejection = function(event) {
+            console.error('Unhandled Rejection:', event.reason);
+        };
     </script>
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #F9F9F9; color: #333333; overflow-x: hidden; }
@@ -40,19 +39,16 @@
         .line-art { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 6s ease-in-out forwards; }
         @keyframes dash { to { stroke-dashoffset: 0; } }
         
-        /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1A3C34; }
         ::-webkit-scrollbar-thumb { background: #C5A07D; border-radius: 4px; }
         
         .box-shadow-premium { box-shadow: 0 20px 50px rgba(26, 60, 52, 0.1); }
-        
-        /* Custom scrollbar for modal gallery */
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #F9F9F9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #1A3C34; }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@19.0.0",
@@ -66,5 +62,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- index.tsx를 명시적으로 모듈로 로드하여 배포 환경에서의 누락을 방지합니다. -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
