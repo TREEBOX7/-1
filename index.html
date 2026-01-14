@@ -34,7 +34,7 @@
         };
     </script>
     <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #F9F9F9; color: #333333; overflow-x: hidden; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #F9F9F9; color: #333333; overflow-x: hidden; margin: 0; padding: 0; }
         .glass-nav { background: rgba(26, 60, 52, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(197, 160, 125, 0.2); }
         .line-art { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 6s ease-in-out forwards; }
         @keyframes dash { to { stroke-dashoffset: 0; } }
@@ -62,7 +62,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- index.tsx를 명시적으로 모듈로 로드하여 배포 환경에서의 누락을 방지합니다. -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>

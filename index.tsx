@@ -3,13 +3,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-const startApp = () => {
+const render = () => {
   const rootElement = document.getElementById('root');
   if (!rootElement) {
-    console.error("Failed to find the root element with id 'root'.");
+    console.error("Root element not found");
     return;
   }
-
+  
   try {
     const root = createRoot(rootElement);
     root.render(
@@ -17,15 +17,13 @@ const startApp = () => {
         <App />
       </React.StrictMode>
     );
-    console.log("TReeBOX App successfully mounted.");
-  } catch (err) {
-    console.error("Critical error during React mounting:", err);
+  } catch (error) {
+    console.error("Failed to render React app:", error);
   }
 };
 
-// DOM이 완전히 로드된 후 실행되도록 보장합니다.
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startApp);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  render();
 } else {
-  startApp();
+  document.addEventListener('DOMContentLoaded', render);
 }
