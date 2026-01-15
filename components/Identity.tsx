@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PROCESS_STEPS, PROMISES } from '../constants';
+import { PROCESS_STEPS, PROMISES } from '../constants.tsx';
 
 const Identity: React.FC = () => {
   return (

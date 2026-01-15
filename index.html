@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <script>
-        // Tailwind Configuration
         window.tailwind.config = {
             theme: {
                 extend: {
@@ -25,12 +24,8 @@
             }
         };
 
-        // Error tracking for deployment debugging
         window.onerror = function(message, source, lineno, colno, error) {
             console.error('Global Error:', message, 'at', source, ':', lineno);
-        };
-        window.onunhandledrejection = function(event) {
-            console.error('Unhandled Rejection:', event.reason);
         };
     </script>
     <style>

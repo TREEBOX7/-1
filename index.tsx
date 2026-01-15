@@ -1,15 +1,11 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './App.tsx';
 
-const render = () => {
-  const rootElement = document.getElementById('root');
-  if (!rootElement) {
-    console.error("Root element not found");
-    return;
-  }
-  
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
   try {
     const root = createRoot(rootElement);
     root.render(
@@ -18,12 +14,8 @@ const render = () => {
       </React.StrictMode>
     );
   } catch (error) {
-    console.error("Failed to render React app:", error);
+    console.error("Critical: Failed to render React application.", error);
   }
-};
-
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  render();
 } else {
-  document.addEventListener('DOMContentLoaded', render);
+  console.error("Critical: Root element not found.");
 }
