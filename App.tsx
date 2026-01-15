@@ -34,7 +34,7 @@ const App: React.FC = () => {
       localStorage.setItem('treebox_portfolio', JSON.stringify(newPortfolios));
     } catch (error) {
       console.error('Storage limit exceeded.', error);
-      alert('이미지 용량이 너무 커서 브라우저 저장이 불가능합니다. 저용량 이미지를 사용해 주세요.');
+      alert('데이터가 브라우저 저장 한계를 초과했습니다. 더 작은 이미지를 사용해 주세요.');
     }
   };
 

@@ -24,8 +24,12 @@
             }
         };
 
+        // 런타임 에러 발생 시 콘솔에 상세 기록
         window.onerror = function(message, source, lineno, colno, error) {
-            console.error('Global Error:', message, 'at', source, ':', lineno);
+            console.error('Runtime Error:', message, 'at', source, ':', lineno, ':', colno, error);
+        };
+        window.onunhandledrejection = function(event) {
+            console.error('Promise Rejection:', event.reason);
         };
     </script>
     <style>
@@ -57,6 +61,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- 모듈 로드 오류를 방지하기 위해 파일 경로와 타입을 명시합니다. -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>
