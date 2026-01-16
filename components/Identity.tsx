@@ -8,14 +8,18 @@ const Identity: React.FC = () => {
       <div className="container mx-auto px-8">
         <div className="max-w-4xl mx-auto text-center mb-32">
           <span className="text-cardboard font-bold tracking-[0.3em] text-[10px] uppercase block mb-4">Identity & Trust</span>
-          <h2 className="text-5xl font-sans text-forest mb-8 font-bold leading-tight">왜 TReeBOX와 <br className="md:hidden"/> 함께해야 할까요?</h2>
-          <div className="w-16 h-[2px] bg-cardboard mx-auto"></div>
+          <h2 className="text-5xl font-sans text-forest mb-8 font-bold leading-tight">AI가 선사하는 <br className="md:hidden"/> 시각화의 혁명</h2>
+          <p className="text-charcoal/40 text-sm max-w-2xl mx-auto leading-relaxed">
+            TReeBOX는 단순한 렌더링을 넘어, AI를 활용해 전통적인 작업 방식의 한계를 돌파합니다. <br/>
+            더 정교한 디테일, 더 빠른 납기, 그리고 비교할 수 없는 감동을 선사합니다.
+          </p>
+          <div className="w-16 h-[2px] bg-cardboard mx-auto mt-10"></div>
         </div>
 
         {/* Process Flow */}
         <div className="mb-40">
           <div className="flex items-center justify-between mb-20">
-            <h3 className="text-2xl font-sans text-forest font-bold italic">Our Process: 성장의 여정</h3>
+            <h3 className="text-2xl font-sans text-forest font-bold italic">Our Process: 기술과 감성의 조화</h3>
             <div className="hidden md:block h-[1px] bg-forest/10 flex-1 ml-10"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -44,7 +48,7 @@ const Identity: React.FC = () => {
               <div className="text-cardboard mb-8 transform group-hover:scale-110 transition-transform">
                 {promise.title === 'Time' && <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
                 {promise.title === 'Transparence' && <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>}
-                {promise.title === 'Care' && <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 12l2 2 4-4m5.618-4.016A3.323 3.323 0 0010.603 3.303l-.202.03a3.323 3.323 0 00-2.283 2.327l-.02.09a3.323 3.323 0 001.42 3.633l.056.035c.12.08.18.22.18.362v1.752c0 .285.12.56.326.74l1.173 1.025c.343.3.435.793.22 1.189l-.513.943c-.22.404-.707.576-1.127.382l-1.076-.497a1 1 0 00-.814 0l-1.076.497c-.42.194-.907.022-1.127-.382l-.513-.943a1.107 1.107 0 01.22-1.189l1.173-1.025a.991.991 0 00.326-.74V9.851c0-.142.06-.282.18-.362l.056-.035a3.323 3.323 0 001.42-3.633l-.02-.09A3.323 3.323 0 003.55 3.51a3.323 3.323 0 00-1.895 2.182" /></svg>}
+                {promise.title === 'Care' && <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}
               </div>
               <h4 className="text-2xl font-bold text-forest mb-6">{promise.label}</h4>
               <p className="text-charcoal/60 leading-relaxed">{promise.desc}</p>
