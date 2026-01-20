@@ -20,7 +20,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     title: 'Minimalist Monolith House',
     category: 'Exterior',
     description: '거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다. 숲속의 고립된 아름다움을 위해 세밀한 식생 환경(Scattering)을 구축했습니다.',
-    images: ['https://images.unsplash.com/photo-1518005020951-ecc849166455?auto=format&fit=crop&q=80&w=1200'],
+    images: ['https://postfiles.pstatic.net/MjAyNjAxMTZfNTAg/MDAxNzY4NTQxNDc5Njg1.FlrGzFupb7J4Nu5XRxjzB0-qwpj7AC8-1GQC5UuVAb4g.jppFz7vN5B8_xk3k9t2Z772S04jAl51mzOQA-w02120g.JPEG/2025_09_17_18_44_IMG_1278.JPG?type=w773'],
     role: 'Environment Design',
     contribution: 80,
     result: '건축 잡지 "AD" 메인 커버 프로젝트 선정'

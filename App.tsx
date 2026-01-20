@@ -19,18 +19,22 @@ const App: React.FC = () => {
       const savedVersion = localStorage.getItem('treebox_data_version');
       const savedData = localStorage.getItem('treebox_portfolio');
 
-      // 버전이 다르거나 저장된 데이터가 없으면 코드의 최신 데이터로 강제 업데이트
-      if (savedVersion !== DATA_VERSION || !savedData) {
-        console.log(`Syncing with Code Data (v${DATA_VERSION})`);
-        setPortfolios(INITIAL_PORTFOLIO);
-        localStorage.setItem('treebox_portfolio', JSON.stringify(INITIAL_PORTFOLIO));
-        localStorage.setItem('treebox_data_version', DATA_VERSION);
-      } else {
+      // 1. 저장된 데이터가 있고 버전이 같다면 로컬 데이터 사용
+      if (savedData && savedVersion === DATA_VERSION) {
         const parsed = JSON.parse(savedData);
         if (Array.isArray(parsed) && parsed.length > 0) {
           setPortfolios(parsed);
+          console.log("Loaded existing data from local storage.");
+          return;
         }
       }
+
+      // 2. 저장된 데이터가 없거나 버전이 강제로 업데이트된 경우에만 초기 데이터 로드
+      console.log(`Initializing/Updating Data to v${DATA_VERSION}`);
+      setPortfolios(INITIAL_PORTFOLIO);
+      localStorage.setItem('treebox_portfolio', JSON.stringify(INITIAL_PORTFOLIO));
+      localStorage.setItem('treebox_data_version', DATA_VERSION);
+      
     } catch (error) {
       console.error('Failed to load portfolios from storage:', error);
       setPortfolios(INITIAL_PORTFOLIO);
@@ -41,11 +45,10 @@ const App: React.FC = () => {
     setPortfolios(newPortfolios);
     try {
       localStorage.setItem('treebox_portfolio', JSON.stringify(newPortfolios));
-      // 사용자가 수동으로 수정한 경우에도 현재 코드 버전을 유지하여 자동 덮어쓰기 방지
       localStorage.setItem('treebox_data_version', DATA_VERSION);
     } catch (error) {
       console.error('Storage limit exceeded.', error);
-      alert('데이터가 브라우저 저장 한계를 초과했습니다. 더 작은 이미지를 사용해 주세요.');
+      alert('이미지 용량이 너무 커서 브라우저에 저장할 수 없습니다. EXPORT 기능을 이용해 백업 파일로 보관하세요.');
     }
   };
 
