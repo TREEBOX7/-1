@@ -5,7 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TReeBOX | Rooted & Unboxed</title>
+    <!-- Tailwind CSS (Build 시점에 처리되지만 개발 편의를 위해 CDN 유지 가능, 또는 Vite가 처리) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#1A3C34',
+                        cardboard: '#C5A07D',
+                        offwhite: '#F9F9F9',
+                        charcoal: '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #F9F9F9; color: #333333; overflow-x: hidden; margin: 0; padding: 0; }
         .glass-nav { background: rgba(26, 60, 52, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(197, 160, 125, 0.2); }
@@ -14,6 +33,11 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1A3C34; }
         ::-webkit-scrollbar-thumb { background: #C5A07D; border-radius: 4px; }
+        
+        /* Premium Shadows */
+        .box-shadow-premium {
+            box-shadow: 0 40px 100px -20px rgba(26, 60, 52, 0.08);
+        }
     </style>
 <script type="importmap">
 {
@@ -29,6 +53,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- Vite는 자동으로 이 경로를 해석하여 빌드합니다 -->
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>
