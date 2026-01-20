@@ -1,6 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { PortfolioItem, Category } from '../types.ts';
+import { INITIAL_PORTFOLIO } from '../constants.tsx';
 
 interface AdminProps {
   onExit: () => void;
@@ -25,6 +26,15 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     }
   };
 
+  const handleSyncWithCode = () => {
+    if (window.confirm('브라우저에 저장된 데이터를 삭제하고, GitHub 코드(constants.tsx)에 정의된 최신 포트폴리오 데이터를 불러오시겠습니까?')) {
+      localStorage.removeItem('treebox_portfolio');
+      onUpdate(INITIAL_PORTFOLIO);
+      alert('코드 데이터와 동기화되었습니다. 페이지를 새로고침하면 최종 적용됩니다.');
+      window.location.reload();
+    }
+  };
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
@@ -32,9 +42,8 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     const newImages: string[] = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      // 파일 크기 체크 (1MB 이하 권장)
       if (file.size > 1024 * 1024) {
-        if (!window.confirm(`${file.name}의 용량이 1MB를 초과합니다. 브라우저 저장소 용량 제한으로 인해 업로드가 실패할 수 있습니다. 계속하시겠습니까?`)) continue;
+        if (!window.confirm(`${file.name}의 용량이 1MB를 초과합니다. 계속하시겠습니까?`)) continue;
       }
       
       const base64 = await new Promise<string>((resolve) => {
@@ -102,10 +111,9 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
   const exportData = () => {
     const dataStr = JSON.stringify(portfolios, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = `treebox_portfolio_${new Date().toISOString().split('T')[0]}.json`;
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.setAttribute('download', `treebox_portfolio_${new Date().toISOString().split('T')[0]}.json`);
     linkElement.click();
   };
 
@@ -121,8 +129,6 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
             onUpdate(json);
             alert('데이터를 성공적으로 가져왔습니다.');
           }
-        } else {
-          alert('유효하지 않은 포트폴리오 데이터 형식입니다.');
         }
       } catch (err) {
         alert('파일을 읽는 중 오류가 발생했습니다.');
@@ -162,6 +168,7 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
             <p className="text-white/40 text-sm mt-2">Manage visualization content and sync external data.</p>
           </div>
           <div className="flex flex-wrap gap-4">
+            <button onClick={handleSyncWithCode} className="px-6 py-3 bg-orange-600 text-white font-bold text-[10px] tracking-widest hover:bg-orange-700 transition-all border border-transparent shadow-lg shadow-orange-900/20">SYNC WITH CODE</button>
             <button onClick={exportData} className="px-6 py-3 border border-cardboard text-cardboard font-bold text-[10px] tracking-widest hover:bg-cardboard hover:text-forest transition-all">EXPORT JSON</button>
             <button onClick={() => importInputRef.current?.click()} className="px-6 py-3 border border-white/20 text-white font-bold text-[10px] tracking-widest hover:bg-white/10 transition-all">IMPORT JSON</button>
             <input type="file" ref={importInputRef} className="hidden" accept=".json" onChange={importData} />
@@ -220,7 +227,6 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Manage Images</label>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Method 1: URL Input */}
                     <div className="space-y-2">
                       <div className="flex gap-2">
                         <input 
@@ -238,10 +244,8 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
                           ADD
                         </button>
                       </div>
-                      <p className="text-[9px] text-charcoal/40 uppercase tracking-widest">* 용량 제한 방지를 위해 Unsplash 등의 외부 URL 사용을 권장합니다.</p>
                     </div>
 
-                    {/* Method 2: File Upload */}
                     <div 
                       onClick={() => fileInputRef.current?.click()}
                       className="border-2 border-dashed border-forest/10 bg-offwhite p-4 flex items-center justify-center cursor-pointer hover:border-cardboard transition-colors gap-3"
