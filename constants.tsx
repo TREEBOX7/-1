@@ -1,11 +1,16 @@
 
 import { PortfolioItem } from './types';
 
-// GitHub에서 수정 후 이 버전을 올리면 브라우저 캐시를 무시하고 강제 업데이트됩니다.
+/**
+ * [중요: 사진 영구 보존 방법]
+ * 1. 관리자 페이지에서 사진을 모두 업로드합니다.
+ * 2. 상단의 'EXPORT' 버튼을 눌러 JSON 파일을 다운로드합니다.
+ * 3. 다운로드된 파일의 내용을 복사하여 아래 'INITIAL_PORTFOLIO' 배열 안에 붙여넣으세요.
+ * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.2') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
+ */
 export const DATA_VERSION = '1.0.1'; 
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
-  
   {
     "id": "1",
     "title": "The Timber Nexus Pavilion",
@@ -39,7 +44,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Interior",
     "description": "하이엔드 주거 공간을 위한 인테리어 CG입니다. 미니멀한 가구 배치와 빛의 굴절을 정교하게 계산하여 정적인 공간의 미학을 완성했습니다.",
     "images": [
-      "https://postfiles.pstatic.net/MjAyNjAxMjBfMjI4/MDAxNzY4OTAyODgyNzYz.9L5TSJd6OuVoV5w0cm6GUGXmWWFdvf1cXFSNtNr1yjog.ti0tam1doryuqciDd1e3u8ydSvioJaLIjTXl-e4Vjngg.JPEG/t-01-e.jpg?type=w773",
+      "https://postfiles.pstatic.net/MjAyNjAxMjBfMjI4/MDAxNzY4OTAyODgyNzYz.9L5TSJd6VoV5w0cm6GUGXmWWFdvf1cXFSNtNr1yjog.ti0tam1doryuqciDd1e3u8ydSvioJaLIjTXl-e4Vjngg.JPEG/t-01-e.jpg?type=w773",
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjY5/MDAxNzY4OTAyODgzMTc0.IsuTmKKArToZQO7-EIkzXGC7xq8hB-LeCN9b4JeaTSog.D93LWxeXudBI-2XLv4-FVSYQBsciM1kkX74Dhsw99Dkg.JPEG/ca-04.jpg?type=w773"
     ],
     "role": "Lighting & Texturing",
@@ -84,7 +89,6 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "contribution": 100,
     "result": "Interior Design Portfolio of the Year"
   }
-
 ];
 
 export const PROCESS_STEPS = [
