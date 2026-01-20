@@ -1,6 +1,9 @@
 
 import { PortfolioItem } from './types';
 
+// GitHub에서 수정 후 이 버전을 올리면 브라우저 캐시를 무시하고 강제 업데이트됩니다.
+export const DATA_VERSION = '1.0.1'; 
+
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
     id: '1',

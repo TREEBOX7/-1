@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { PortfolioItem, Category } from '../types.ts';
-import { INITIAL_PORTFOLIO } from '../constants.tsx';
+import { INITIAL_PORTFOLIO, DATA_VERSION } from '../constants.tsx';
 
 interface AdminProps {
   onExit: () => void;
@@ -14,24 +14,16 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
   const [password, setPassword] = useState('');
   const [editingItem, setEditingItem] = useState<Partial<PortfolioItem> | null>(null);
   const [imageUrlInput, setImageUrlInput] = useState('');
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === '1111') {
+    if (password === '0242') {
       setIsAuthenticated(true);
     } else {
       alert('접근이 거부되었습니다.');
-    }
-  };
-
-  const handleSyncWithCode = () => {
-    if (window.confirm('브라우저에 저장된 데이터를 삭제하고, GitHub 코드(constants.tsx)에 정의된 최신 포트폴리오 데이터를 불러오시겠습니까?')) {
-      localStorage.removeItem('treebox_portfolio');
-      onUpdate(INITIAL_PORTFOLIO);
-      alert('코드 데이터와 동기화되었습니다. 페이지를 새로고침하면 최종 적용됩니다.');
-      window.location.reload();
     }
   };
 
@@ -42,8 +34,9 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     const newImages: string[] = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (file.size > 1024 * 1024) {
-        if (!window.confirm(`${file.name}의 용량이 1MB를 초과합니다. 계속하시겠습니까?`)) continue;
+      // 용량 제한 안내 (브라우저 스토리지 한계 때문)
+      if (file.size > 2 * 1024 * 1024) {
+        if (!window.confirm(`${file.name}의 용량이 2MB를 초과합니다. 브라우저 저장 용량이 부족해질 수 있습니다. 계속할까요?`)) continue;
       }
       
       const base64 = await new Promise<string>((resolve) => {
@@ -58,27 +51,12 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
       ...prev,
       images: [...(prev?.images || []), ...newImages],
     }));
-  };
-
-  const addImageUrl = () => {
-    if (!imageUrlInput.trim()) return;
-    setEditingItem((prev) => ({
-      ...prev,
-      images: [...(prev?.images || []), imageUrlInput.trim()],
-    }));
-    setImageUrlInput('');
-  };
-
-  const removeImage = (index: number) => {
-    setEditingItem((prev) => ({
-      ...prev,
-      images: (prev?.images || []).filter((_, i) => i !== index),
-    }));
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleSave = () => {
     if (!editingItem?.title) {
-      alert('제목을 입력해주세요.');
+      alert('프로젝트 제목을 입력해주세요.');
       return;
     }
     
@@ -100,6 +78,7 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     
     onUpdate(newList);
     setEditingItem(null);
+    alert('수정사항이 브라우저에 저장되었습니다.');
   };
 
   const handleDelete = (id: string) => {
@@ -108,15 +87,17 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     }
   };
 
+  // 데이터 내보내기 (JSON 파일로 저장)
   const exportData = () => {
     const dataStr = JSON.stringify(portfolios, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', `treebox_portfolio_${new Date().toISOString().split('T')[0]}.json`);
+    linkElement.setAttribute('download', `treebox_portfolio_backup.json`);
     linkElement.click();
   };
 
+  // 데이터 가져오기 (JSON 파일 열기)
   const importData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -125,13 +106,13 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
       try {
         const json = JSON.parse(event.target?.result as string);
         if (Array.isArray(json)) {
-          if (window.confirm('기존 데이터를 덮어쓰고 새로운 데이터를 가져오시겠습니까?')) {
+          if (window.confirm('기존 데이터를 모두 지우고 불러온 파일의 내용으로 덮어씌울까요?')) {
             onUpdate(json);
-            alert('데이터를 성공적으로 가져왔습니다.');
+            alert('데이터를 성공적으로 불러왔습니다.');
           }
         }
       } catch (err) {
-        alert('파일을 읽는 중 오류가 발생했습니다.');
+        alert('올바른 데이터 파일이 아닙니다.');
       }
     };
     reader.readAsText(file);
@@ -142,16 +123,22 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
     return (
       <div className="h-screen bg-forest flex items-center justify-center p-8">
         <form onSubmit={handleLogin} className="w-full max-w-md bg-white p-12 shadow-2xl border-t-8 border-cardboard">
-          <h2 className="text-3xl font-sans font-bold text-forest mb-2">Internal Portal</h2>
-          <p className="text-sm text-charcoal/40 mb-10">Access restricted to TReeBOX administrators.</p>
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-sans font-bold text-forest mb-2">관리자 로그인</h2>
+            <p className="text-sm text-charcoal/40 tracking-wider">포트폴리오 수정을 위해 암호를 입력하세요.</p>
+          </div>
           <div className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Security Password</label>
-              <input type="password" autoFocus className="w-full p-5 bg-offwhite border-b-2 border-forest/10 focus:border-cardboard outline-none font-bold tracking-widest" placeholder="••••" value={password} onChange={e => setPassword(e.target.value)} />
-            </div>
-            <div className="flex gap-4 pt-4">
-              <button type="submit" className="flex-1 py-5 bg-forest text-white font-bold tracking-[0.2em] hover:bg-cardboard transition-colors">AUTHENTICATE</button>
-              <button type="button" onClick={onExit} className="px-8 py-5 border border-forest/10 text-forest font-bold hover:bg-offwhite">CANCEL</button>
+            <input 
+              type="password" 
+              autoFocus 
+              className="w-full p-5 bg-offwhite border-b-2 border-forest/10 focus:border-cardboard outline-none font-bold tracking-widest text-center text-2xl" 
+              placeholder="••••" 
+              value={password} 
+              onChange={e => setPassword(e.target.value)} 
+            />
+            <div className="flex gap-4">
+              <button type="submit" className="flex-1 py-5 bg-forest text-white font-bold tracking-widest hover:bg-cardboard transition-colors">접속하기</button>
+              <button type="button" onClick={onExit} className="px-8 py-5 border border-forest/10 text-forest font-bold">닫기</button>
             </div>
           </div>
         </form>
@@ -161,19 +148,18 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
 
   return (
     <div className="min-h-screen bg-offwhite pb-20 overflow-y-auto">
-      <div className="bg-forest text-white py-12 mb-16">
+      <div className="bg-forest text-white py-12 mb-16 shadow-xl">
         <div className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            <h1 className="text-3xl font-sans font-bold tracking-tight">CGI Portfolio Engine</h1>
-            <p className="text-white/40 text-sm mt-2">Manage visualization content and sync external data.</p>
+            <h1 className="text-3xl font-sans font-bold tracking-tight">프로젝트 관리도구</h1>
+            <p className="text-white/40 text-sm mt-2">브라우저 로컬 저장소에 데이터가 보관됩니다.</p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <button onClick={handleSyncWithCode} className="px-6 py-3 bg-orange-600 text-white font-bold text-[10px] tracking-widest hover:bg-orange-700 transition-all border border-transparent shadow-lg shadow-orange-900/20">SYNC WITH CODE</button>
-            <button onClick={exportData} className="px-6 py-3 border border-cardboard text-cardboard font-bold text-[10px] tracking-widest hover:bg-cardboard hover:text-forest transition-all">EXPORT JSON</button>
-            <button onClick={() => importInputRef.current?.click()} className="px-6 py-3 border border-white/20 text-white font-bold text-[10px] tracking-widest hover:bg-white/10 transition-all">IMPORT JSON</button>
+            <button onClick={() => setEditingItem({ category: 'Exterior', contribution: 100, images: [] })} className="px-8 py-3 bg-cardboard text-forest font-bold text-xs tracking-widest hover:bg-white transition-colors">신규 프로젝트 추가</button>
+            <button onClick={() => importInputRef.current?.click()} className="px-6 py-3 border border-white/20 text-white font-bold text-[10px] tracking-widest hover:bg-white/10 transition-all">백업 불러오기(IMPORT)</button>
+            <button onClick={exportData} className="px-6 py-3 border border-white/20 text-white font-bold text-[10px] tracking-widest hover:bg-white/10 transition-all">전체 백업하기(EXPORT)</button>
             <input type="file" ref={importInputRef} className="hidden" accept=".json" onChange={importData} />
-            <button onClick={() => setEditingItem({ category: 'Exterior', contribution: 100, images: [] })} className="px-8 py-3 bg-cardboard text-forest font-bold text-xs tracking-widest hover:bg-white transition-colors">ADD PROJECT</button>
-            <button onClick={onExit} className="px-8 py-3 border border-white/20 text-white font-bold text-xs tracking-widest hover:bg-white/10 transition-colors">CLOSE</button>
+            <button onClick={onExit} className="px-8 py-3 border border-white/40 text-white font-bold text-xs tracking-widest hover:bg-white/10 transition-colors">로그아웃</button>
           </div>
         </div>
       </div>
@@ -184,15 +170,14 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
             <div key={p.id} className="bg-white border border-forest/5 shadow-lg group">
               <div className="aspect-video relative overflow-hidden bg-forest/5">
                 <img src={p.images[0] || 'https://via.placeholder.com/400x225?text=No+Image'} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 text-[10px] font-bold text-forest tracking-widest">{p.category}</div>
-                <div className="absolute bottom-4 right-4 px-2 py-1 bg-forest/80 text-white text-[9px] font-bold">IMAGE x{p.images.length}</div>
+                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 text-[10px] font-bold text-forest tracking-widest uppercase">{p.category}</div>
+                <div className="absolute bottom-4 right-4 px-2 py-1 bg-forest/80 text-white text-[9px] font-bold">{p.images.length} IMAGES</div>
               </div>
               <div className="p-8">
                 <h3 className="text-xl font-bold text-forest mb-4 line-clamp-1">{p.title}</h3>
-                <p className="text-sm text-charcoal/50 line-clamp-2 h-10">{p.description}</p>
                 <div className="mt-8 pt-6 border-t border-forest/5 flex gap-3">
-                  <button onClick={() => setEditingItem(p)} className="flex-1 py-3 text-[10px] font-bold border border-forest/10 hover:bg-forest hover:text-white transition-colors tracking-widest">EDIT</button>
-                  <button onClick={() => handleDelete(p.id)} className="px-5 py-3 text-[10px] font-bold border border-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-colors">✕</button>
+                  <button onClick={() => setEditingItem(p)} className="flex-1 py-3 text-[10px] font-bold border border-forest/10 hover:bg-forest hover:text-white transition-colors tracking-widest">수정</button>
+                  <button onClick={() => handleDelete(p.id)} className="px-5 py-3 text-[10px] font-bold border border-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-colors">삭제</button>
                 </div>
               </div>
             </div>
@@ -203,55 +188,34 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
             <div className="fixed inset-0 bg-forest/90 backdrop-blur-md" onClick={() => setEditingItem(null)}></div>
             <div className="relative w-full max-w-4xl bg-white p-8 md:p-12 shadow-2xl overflow-y-auto max-h-[95vh] rounded-sm">
-              <div className="flex justify-between items-end mb-8">
-                <h2 className="text-3xl md:text-4xl font-sans font-bold text-forest">{editingItem.id ? 'Edit Content' : 'Unbox New Idea'}</h2>
-                <span className="text-[10px] font-bold text-cardboard tracking-[0.4em]">ADMIN EDITOR</span>
-              </div>
+              <h2 className="text-3xl font-sans font-bold text-forest mb-8">{editingItem.id ? '프로젝트 수정' : '새 프로젝트 등록'}</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Project Title</label>
-                  <input type="text" value={editingItem.title || ''} onChange={e => setEditingItem({...editingItem, title: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-bold" placeholder="프로젝트 명칭" />
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">프로젝트 이름</label>
+                  <input type="text" value={editingItem.title || ''} onChange={e => setEditingItem({...editingItem, title: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-bold" placeholder="예: 한남동 갤러리 하우스" />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Category</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">카테고리</label>
                   <select value={editingItem.category || 'Exterior'} onChange={e => setEditingItem({...editingItem, category: e.target.value as Category})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-bold">
                     <option value="Exterior">Exterior Viz</option>
                     <option value="Interior">Interior Viz</option>
                     <option value="Landscape">Landscape Viz</option>
-                    <option value="VR & Movie">Interative / VR</option>
+                    <option value="VR & Movie">VR & Movie</option>
                   </select>
                 </div>
                 
                 <div className="md:col-span-2 space-y-4">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Manage Images</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">이미지 관리</label>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <div className="flex gap-2">
-                        <input 
-                          type="text" 
-                          placeholder="외부 이미지 URL 입력 (권장)" 
-                          className="flex-1 p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard text-sm"
-                          value={imageUrlInput}
-                          onChange={(e) => setImageUrlInput(e.target.value)}
-                          onKeyDown={(e) => e.key === 'Enter' && addImageUrl()}
-                        />
-                        <button 
-                          onClick={addImageUrl}
-                          className="px-6 bg-forest text-white font-bold text-xs"
-                        >
-                          ADD
-                        </button>
-                      </div>
-                    </div>
-
                     <div 
                       onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-forest/10 bg-offwhite p-4 flex items-center justify-center cursor-pointer hover:border-cardboard transition-colors gap-3"
+                      className="border-2 border-dashed border-cardboard/40 bg-cardboard/5 p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-cardboard/10 transition-colors gap-3"
                     >
-                      <span className="text-xl">📁</span>
-                      <span className="text-xs font-bold text-forest/50 uppercase tracking-widest">Local Upload</span>
+                      <span className="text-3xl">📁</span>
+                      <span className="text-sm font-bold text-forest uppercase tracking-widest">내 컴퓨터에서 사진 올리기</span>
+                      <p className="text-[10px] text-forest/40">여러 장 선택 가능</p>
                       <input 
                         type="file" 
                         ref={fileInputRef} 
@@ -261,18 +225,41 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
                         onChange={handleFileChange} 
                       />
                     </div>
+                    <div className="flex flex-col gap-2">
+                       <p className="text-[10px] font-bold uppercase tracking-widest text-forest/40">또는 이미지 주소(URL) 입력</p>
+                       <div className="flex gap-2">
+                        <input 
+                          type="text" 
+                          placeholder="https://..." 
+                          className="flex-1 p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard text-sm"
+                          value={imageUrlInput}
+                          onChange={(e) => setImageUrlInput(e.target.value)}
+                        />
+                        <button 
+                          onClick={() => {
+                            if (imageUrlInput.trim()) {
+                              setEditingItem(prev => ({...prev, images: [...(prev?.images || []), imageUrlInput.trim()]}));
+                              setImageUrlInput('');
+                            }
+                          }}
+                          className="px-6 bg-forest text-white font-bold text-xs"
+                        >
+                          추가
+                        </button>
+                       </div>
+                    </div>
                   </div>
                   
                   {editingItem.images && editingItem.images.length > 0 && (
-                    <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6 max-h-[240px] overflow-y-auto p-2 border border-forest/5 custom-scrollbar">
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6 max-h-[240px] overflow-y-auto p-2 border border-forest/5">
                       {editingItem.images.map((img, idx) => (
-                        <div key={idx} className="relative aspect-square bg-forest/5 border border-forest/5 group overflow-hidden">
+                        <div key={idx} className="relative aspect-square group overflow-hidden border border-forest/10">
                           <img src={img} className="w-full h-full object-cover" />
                           <button 
-                            onClick={() => removeImage(idx)}
+                            onClick={() => setEditingItem(prev => ({...prev, images: (prev?.images || []).filter((_, i) => i !== idx)}))}
                             className="absolute inset-0 bg-red-500/80 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center font-bold"
                           >
-                            REMOVE
+                            삭제
                           </button>
                         </div>
                       ))}
@@ -281,25 +268,21 @@ const Admin: React.FC<AdminProps> = ({ onExit, portfolios, onUpdate }) => {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Artist Role</label>
-                  <input type="text" value={editingItem.role || ''} onChange={e => setEditingItem({...editingItem, role: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-medium" placeholder="Ex: Lead Artist" />
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">아티스트 역할</label>
+                  <input type="text" value={editingItem.role || ''} onChange={e => setEditingItem({...editingItem, role: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard" placeholder="예: Lead CGI Artist" />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Contribution (%)</label>
-                  <input type="number" value={editingItem.contribution || 0} onChange={e => setEditingItem({...editingItem, contribution: parseInt(e.target.value)})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-bold text-cardboard" />
-                </div>
-                <div className="md:col-span-2 space-y-3">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Key Performance Result</label>
-                  <input type="text" value={editingItem.result || ''} onChange={e => setEditingItem({...editingItem, result: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard italic" placeholder="Ex: Award-winning project" />
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">기여도 (%)</label>
+                  <input type="number" value={editingItem.contribution || 0} onChange={e => setEditingItem({...editingItem, contribution: parseInt(e.target.value)})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard font-bold" />
                 </div>
               </div>
               <div className="space-y-3 mb-12">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">Project Description</label>
-                <textarea rows={4} value={editingItem.description || ''} onChange={e => setEditingItem({...editingItem, description: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard resize-none leading-relaxed" placeholder="상세 설명을 입력하세요."></textarea>
+                <label className="text-[10px] font-bold uppercase tracking-widest text-forest/40">설명 (Description)</label>
+                <textarea rows={4} value={editingItem.description || ''} onChange={e => setEditingItem({...editingItem, description: e.target.value})} className="w-full p-4 bg-offwhite border-b-2 border-forest/5 outline-none focus:border-cardboard resize-none leading-relaxed" placeholder="프로젝트에 대한 설명을 입력하세요."></textarea>
               </div>
               <div className="flex flex-col md:flex-row gap-4">
-                <button onClick={handleSave} className="flex-1 py-6 bg-forest text-white font-bold tracking-[0.3em] hover:bg-cardboard transition-colors shadow-xl">PUBLISH CHANGES</button>
-                <button onClick={() => setEditingItem(null)} className="md:px-12 py-6 border border-forest/10 text-forest font-bold tracking-widest hover:bg-offwhite">DISCARD</button>
+                <button onClick={handleSave} className="flex-1 py-6 bg-forest text-white font-bold tracking-[0.3em] hover:bg-cardboard transition-colors shadow-xl">저장하기</button>
+                <button onClick={() => setEditingItem(null)} className="md:px-12 py-6 border border-forest/10 text-forest font-bold tracking-widest hover:bg-offwhite">취소</button>
               </div>
             </div>
           </div>
