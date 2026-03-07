@@ -8,7 +8,7 @@ import { PortfolioItem } from './types';
  * 3. 다운로드된 파일의 내용을 복사하여 아래 'INITIAL_PORTFOLIO' 배열 안에 붙여넣으세요.
  * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.2') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
  */
-export const DATA_VERSION = '1.0.1'; 
+export const DATA_VERSION = '1.0.2'; 
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
@@ -18,6 +18,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다. 자연광의 유입과 그림자의 대비를 극대화하여 평온함을 표현했습니다.",
     "images": [
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjk0/MDAxNzY4OTAyODgzMTU2.IzwGWa22QenVkE31u1yVytHbWyn6Bf5stYEf5WYeH1wg.Bk-yQahyQwZeRzr3RVQlPxy7ll52IGAt1K2aIcOhgCQg.JPEG/251212-4.jpg?type=w773",
+      "https://postfiles.pstatic.net/MjAyNjAzMDdfMjU3/MDAxNzcyODYwNTg1MTUx.FF6Be8TLda-PKpCrYRmTYM9gTidKs6DMxRmwREXxqAwg.8ecyo1Dp6WKzxU8rcfTz1ySYuwRc1kKZtw1lMN92nc0g.JPEG/t-01-e.jpg?type=w773,
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjcw/MDAxNzY4OTAyODgzMTU4.jCHqbcsyCRZL4j5yOkPtfY-kQZHFwnc2Vufi_b8Sv-cg.QuBiI4F8C2pyTrVbhf3XXdyPztK02BIoUQM710N-Ozcg.JPEG/251212-7p.jpg?type=w773"
     ],
     "role": "Lead 3D Artist",
