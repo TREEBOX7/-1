@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Identity from './components/Identity';
-import Portfolio from './components/Portfolio'; // 대소문자 주의! P가 대문자여야 합니다.
+import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
@@ -17,17 +17,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans antialiased">
+    // 배경색을 423411.JPG의 다크 포레스트 그린으로 설정
+    <div className="min-h-screen bg-[#13221e] text-white font-sans antialiased">
       <Header onAdminClick={handleAdminClick} />
-      <main className="bg-black">
+      <main>
         <Hero />
-        <Identity />
+        {/* 이동을 위한 id="identity" 설정 */}
+        <div id="identity">
+          <Identity />
+        </div>
         
-        {/* Portfolio 섹션: 배경을 검은색으로 통일하여 Identity와 부드럽게 연결합니다. */}
-        <section id="portfolio" className="py-32 bg-black border-t border-white/5 scroll-mt-20">
+        {/* 이동을 위한 id="portfolio" 설정 */}
+        <section id="portfolio" className="py-32 scroll-mt-20 border-t border-white/5">
           <div className="container mx-auto px-8">
             <div className="mb-20">
-              <span className="text-green-900 font-bold tracking-[0.3em] text-[10px] uppercase block mb-4">Our Works</span>
+              <span className="text-green-600/50 font-bold tracking-[0.3em] text-[10px] uppercase block mb-4">Our Works</span>
               <h2 className="text-5xl font-bold tracking-tighter uppercase">Portfolio</h2>
             </div>
             <Portfolio portfolios={portfolios} />
