@@ -10,30 +10,34 @@ import { PortfolioItem } from './types';
 import { INITIAL_PORTFOLIO, DATA_VERSION } from './constants';
 
 function App() {
-  const [portfolio, setPortfolio] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
+  const [portfolios, setPortfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
 
   useEffect(() => {
-    // 로컬 스토리지에서 저장된 데이터를 확인하고 버전이 맞으면 불러옵니다.
     const savedData = localStorage.getItem('treebox_portfolio_data');
     const savedVersion = localStorage.getItem('treebox_portfolio_version');
-
     if (savedData && savedVersion === DATA_VERSION) {
-      setPortfolio(JSON.parse(savedData));
+      setPortfolios(JSON.parse(savedData));
     }
   }, []);
 
+  const handleAdminClick = () => {
+    const adminSection = document.getElementById('admin-panel');
+    if (adminSection) adminSection.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-black text-white selection:bg-green-500/30">
-      <Header />
+      <Header onAdminClick={handleAdminClick} />
       <main>
         <Hero />
         <Identity />
-        <Showcase portfolio={portfolio} />
+        <Showcase portfolios={portfolios} />
         <Contact />
       </main>
       <Footer />
-      {/* 관리자 도구는 개발 및 데이터 관리용으로 유지합니다. */}
-      <Admin portfolio={portfolio} setPortfolio={setPortfolio} />
+      <div id="admin-panel">
+        <Admin portfolios={portfolios} setPortfolios={setPortfolios} />
+      </div>
     </div>
   );
 }
