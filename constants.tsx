@@ -1,13 +1,15 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.0.7';
+export const DATA_VERSION = '1.0.8';
 
+// Identity.tsx에서 사용하는 프로세스 단계 데이터입니다.
 export const PROCESS_STEPS = [
   { id: "1", icon: "📋", label: "Planning", desc: "Design concept and structural planning" },
   { id: "2", icon: "🏗️", label: "Modeling", desc: "Detailed 3D geometry creation" },
   { id: "3", icon: "🖥️", label: "Rendering", desc: "High-quality lighting and texturing" }
 ];
 
+// Identity.tsx에서 사용하는 약속 데이터입니다.
 export const PROMISES = [
   { id: "p1", icon: "✨", label: "Quality", desc: "Uncompromising visual excellence" },
   { id: "p2", icon: "📅", label: "Deadline", desc: "Strict adherence to project schedules" }
@@ -20,7 +22,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Exterior",
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다.",
     "images": [
-      "https://postfiles.pstatic.net/MjAyNjAzMDdfMjU3/MDAxNzcyODYwNTg1MTUx.FF6Be8TLda-PKpCrYRmTYM9gTidKs6DMxRmwREXxqAwg.8ecyo1Dp6WKzxU8rcfTz1ySYuwRc1kKZtw1lMN92nc0g.JPEG/t-01-e.jpg?type=w773"
+      "/t-01-e.jpg" 
     ],
     "role": "Lead 3D Artist",
     "contribution": 100,
