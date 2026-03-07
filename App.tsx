@@ -1,14 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header.tsx';
-import Hero from './components/Hero.tsx';
-import Identity from './components/Identity.tsx';
-import Showcase from './components/Showcase.tsx';
-import Contact from './components/Contact.tsx';
-import Footer from './components/Footer.tsx';
-import Admin from './components/Admin.tsx';
-import { PortfolioItem } from './types.ts';
-import { INITIAL_PORTFOLIO, DATA_VERSION } from './constants.tsx';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Identity from './components/Identity';
+import Showcase from './components/Showcase';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Admin from './components/Admin';
+import { PortfolioItem } from './types';
+import { INITIAL_PORTFOLIO, DATA_VERSION } from './constants';
 
 const App: React.FC = () => {
   const [isAdminMode, setIsAdminMode] = useState(false);
