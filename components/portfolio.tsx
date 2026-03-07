@@ -1,46 +1,34 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Identity from './components/Identity';
-import Portfolio from './components/Portfolio'; // Showcase에서 Portfolio로 변경
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Admin from './components/Admin';
-import { PortfolioItem } from './types';
-import { INITIAL_PORTFOLIO } from './constants';
+import React from 'react';
+import { PortfolioItem } from '../types';
 
-function App() {
-  const [portfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
-
-  const handleAdminClick = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };
-
-  return (
-    <div className="min-h-screen bg-black text-white font-sans antialiased">
-      <Header onAdminClick={handleAdminClick} />
-      <main>
-        <Hero />
-        {/* 아까 여백을 줄인 Identity 섹션 */}
-        <Identity />
-        
-        {/* Portfolio 섹션: 이제 코드와 제목 모두 PORTFOLIO입니다. */}
-        <div className="bg-zinc-950 py-24 border-t border-zinc-900">
-          <div className="container mx-auto px-6">
-            <div className="flex items-center gap-4 mb-16">
-              <h2 className="text-4xl font-bold tracking-tighter uppercase">Portfolio</h2>
-              <div className="h-[1px] bg-zinc-800 flex-1 mt-2"></div>
-            </div>
-            <Portfolio portfolios={portfolios} />
-          </div>
-        </div>
-        
-        <Contact />
-      </main>
-      <Footer />
-      <Admin portfolios={portfolios} setPortfolios={() => {}} />
-    </div>
-  );
+interface PortfolioProps {
+  portfolios: PortfolioItem[];
 }
 
-export default App;
+const Portfolio: React.FC<PortfolioProps> = ({ portfolios }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {portfolios.map((item) => (
+        <div key={item.id} className="group relative">
+          <div className="overflow-hidden bg-zinc-900 aspect-[16/9] mb-6 rounded-sm">
+            <img 
+              src={item.images[0]} 
+              alt={item.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-[1px] bg-green-500"></span>
+              <span className="text-xs text-green-500 uppercase tracking-widest">{item.category}</span>
+            </div>
+            <h3 className="text-2xl font-bold tracking-tight">{item.title}</h3>
+            <p className="text-zinc-500 text-sm leading-relaxed line-clamp-2">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Portfolio;
