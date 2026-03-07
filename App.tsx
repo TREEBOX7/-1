@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Identity from './components/Identity';
@@ -7,22 +7,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
 import { PortfolioItem } from './types';
-import { INITIAL_PORTFOLIO, DATA_VERSION } from './constants';
+import { INITIAL_PORTFOLIO } from './constants';
 
 function App() {
-  const [portfolios, setPortfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
-
-  useEffect(() => {
-    const savedData = localStorage.getItem('treebox_portfolio_data');
-    const savedVersion = localStorage.getItem('treebox_portfolio_version');
-    if (savedData && savedVersion === DATA_VERSION) {
-      setPortfolios(JSON.parse(savedData));
-    }
-  }, []);
+  const [portfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
 
   const handleAdminClick = () => {
-    const adminSection = document.getElementById('admin-panel');
-    if (adminSection) adminSection.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   };
 
   return (
@@ -35,9 +26,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      <div id="admin-panel">
-        <Admin portfolios={portfolios} setPortfolios={setPortfolios} />
-      </div>
+      <Admin portfolios={portfolios} setPortfolios={() => {}} />
     </div>
   );
 }
