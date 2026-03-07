@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Identity from './components/Identity';
-import Portfolio from './components/Portfolio'; // Showcase에서 Portfolio로 변경
+import Portfolio from './components/Portfolio'; // 이름을 Portfolio로 변경했습니다.
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
@@ -24,7 +24,7 @@ function App() {
         {/* 아까 여백을 줄인 Identity 섹션 */}
         <Identity />
         
-        {/* Portfolio 섹션: 이제 코드와 제목 모두 PORTFOLIO입니다. */}
+        {/* Portfolio 섹션 제목 복구 */}
         <div className="bg-zinc-950 py-24 border-t border-zinc-900">
           <div className="container mx-auto px-6">
             <div className="flex items-center gap-4 mb-16">
