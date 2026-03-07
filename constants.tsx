@@ -8,7 +8,7 @@ import { PortfolioItem } from './types';
  * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.2') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
  */
 
-export const DATA_VERSION = '1.0.2'; // 숫자를 1.0.2로 올렸습니다.
+export const DATA_VERSION = '1.0.2';
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
@@ -17,8 +17,9 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Exterior",
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다. 자연광의 유입과 그림자의 대비를 극대화하여 평온함을 표현했습니다.",
     "images": [
-      "https://postfiles.pstatic.net/MjAyNjAzMDdfMjU3/MDAxNzcyODYwNTg1MTUx.FF6Be8TLda-PKpCrYRmTYM9gTidKs6DMxRmwREXxqAwg.8ecyo1Dp6WKzxU8rcfTz1ySYuwRc1kKZtw1lMN92nc0g.JPEG/t-01-e.jpg?type=w773",
-          ],
+      "여기에_복사한_이미지_주소_1",
+      "여기에_복사한_이미지_주소_2"
+    ],
     "role": "Lead 3D Artist",
     "contribution": 100,
     "result": "International ArchViz Excellence Award 2024 수상"
@@ -30,8 +31,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "description": "거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다. 숲속의 고립된 아름다움을 위해 세밀한 식생 환경(Scattering)을 구축했습니다.",
     "images": [
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjM1/MDAxNzM3NDA0OTgzNzU5.IHs5grBd_7bb7X2wwCdYYBn2s8k8rsfNnyp-AMutmFEg.hJDTxzkORY2HGmZncPX7mEB21S0T4CqzOBdx4Yy-ZcYg.JPEG/Gemini_Generated_Image_19bth019bth019bt.jpg?type=w773",
-      "https://postfiles.pstatic.net/MjAyNjAxMjBfMjYy/MDAxNzM3NDA0OTgzNzYy.a00z3vkZpAHw5r7tzuiDINLHpRV22N3-eABmppsBWAYg.jfv_fSf553bnATFwjr-Bom3ftxHCZmi6OM5YGIMzbhQg.JPEG/Gemini_Generated_Image_mjaj0gm jaj0gmjaj.jpg?type=w773",
-      "https://postfiles.pstatic.net/MjAyNjAxMjBfMzMA/MDAxNzM3NDA0OTgzMzA5.cWeeINxzrGM4NbM9Wvd5XeM6WZF_Sbd0Af5JHXygz-Ug.yKOs4qC8G3CYI9NaklvjuE6euR9N51qk0UtajBtRoFQg.JPEG/test-2.jpg?type=w773"
+      "https://postfiles.pstatic.net/MjAyNjAxMjBfMTM4/MDAxNzM3NDA0OTgzNzY1.mJ8r7_D7v0y7w_Z7z0y7w_Z7z0y7w_Z7z0y7w_Z7z0y7w.jpg?type=w773"
     ],
     "role": "Environment Design",
     "contribution": 80,
