@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ onAdminClick }) => {
   const navItems = [
     { name: 'HOME', href: '#home' },
     { name: 'IDENTITY', href: '#identity' },
-    { name: 'SHOWCASE', href: '#portfolio' },
+    { name: 'PORTFOLIO', href: '#portfolio' },
     { name: 'CONTACT', href: '#contact' },
   ];
 
