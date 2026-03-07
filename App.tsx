@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -10,70 +9,33 @@ import Admin from './components/Admin';
 import { PortfolioItem } from './types';
 import { INITIAL_PORTFOLIO, DATA_VERSION } from './constants';
 
-const App: React.FC = () => {
-  const [isAdminMode, setIsAdminMode] = useState(false);
-  const [portfolios, setPortfolios] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
+function App() {
+  const [portfolio, setPortfolio] = useState<PortfolioItem[]>(INITIAL_PORTFOLIO);
 
   useEffect(() => {
-    try {
-      const savedVersion = localStorage.getItem('treebox_data_version');
-      const savedData = localStorage.getItem('treebox_portfolio');
+    // 로컬 스토리지에서 저장된 데이터를 확인하고 버전이 맞으면 불러옵니다.
+    const savedData = localStorage.getItem('treebox_portfolio_data');
+    const savedVersion = localStorage.getItem('treebox_portfolio_version');
 
-      // 1. 저장된 데이터가 있고 버전이 같다면 로컬 데이터 사용
-      if (savedData && savedVersion === DATA_VERSION) {
-        const parsed = JSON.parse(savedData);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setPortfolios(parsed);
-          console.log("Loaded existing data from local storage.");
-          return;
-        }
-      }
-
-      // 2. 저장된 데이터가 없거나 버전이 강제로 업데이트된 경우에만 초기 데이터 로드
-      console.log(`Initializing/Updating Data to v${DATA_VERSION}`);
-      setPortfolios(INITIAL_PORTFOLIO);
-      localStorage.setItem('treebox_portfolio', JSON.stringify(INITIAL_PORTFOLIO));
-      localStorage.setItem('treebox_data_version', DATA_VERSION);
-      
-    } catch (error) {
-      console.error('Failed to load portfolios from storage:', error);
-      setPortfolios(INITIAL_PORTFOLIO);
+    if (savedData && savedVersion === DATA_VERSION) {
+      setPortfolio(JSON.parse(savedData));
     }
   }, []);
 
-  const updatePortfolios = (newPortfolios: PortfolioItem[]) => {
-    setPortfolios(newPortfolios);
-    try {
-      localStorage.setItem('treebox_portfolio', JSON.stringify(newPortfolios));
-      localStorage.setItem('treebox_data_version', DATA_VERSION);
-    } catch (error) {
-      console.error('Storage limit exceeded.', error);
-      alert('이미지 용량이 너무 커서 브라우저에 저장할 수 없습니다. EXPORT 기능을 이용해 백업 파일로 보관하세요.');
-    }
-  };
-
   return (
-    <div className="relative min-h-screen bg-offwhite">
-      <Header onAdminClick={() => setIsAdminMode(true)} />
+    <div className="min-h-screen bg-black text-white selection:bg-green-500/30">
+      <Header />
       <main>
         <Hero />
         <Identity />
-        <Showcase portfolios={portfolios} />
+        <Showcase portfolio={portfolio} />
         <Contact />
       </main>
       <Footer />
-
-      {isAdminMode && (
-        <div className="fixed inset-0 z-[1000] animate-in fade-in duration-300">
-          <Admin 
-            onExit={() => setIsAdminMode(false)} 
-            portfolios={portfolios} 
-            onUpdate={updatePortfolios} 
-          />
-        </div>
-      )}
+      {/* 관리자 도구는 개발 및 데이터 관리용으로 유지합니다. */}
+      <Admin portfolio={portfolio} setPortfolio={setPortfolio} />
     </div>
   );
-};
+}
 
 export default App;
