@@ -11,8 +11,9 @@ export const PROCESS_STEPS = [
 
 // Identity.tsx에서 사용하는 약속 데이터입니다.
 export const PROMISES = [
-  { id: "p1", icon: "✨", label: "Quality", desc: "Uncompromising visual excellence" },
-  { id: "p2", icon: "📅", label: "Deadline", desc: "Strict adherence to project schedules" }
+  { title: "Time", label: "Fast Delivery", desc: "AI 기반 프로세스로 압도적인 납기를 보장합니다." },
+  { title: "Transparence", label: "Clear Process", desc: "모든 작업 과정은 투명하게 공유됩니다." },
+  { title: "Care", label: "Customer First", desc: "고객의 비전을 가장 소중하게 생각합니다." }
 ];
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
