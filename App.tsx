@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Identity from './components/Identity';
-import Portfolio from './components/Portfolio'; 
+import Portfolio from './components/Portfolio'; // 대소문자 주의! P가 대문자여야 합니다.
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
@@ -19,18 +19,21 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans antialiased">
       <Header onAdminClick={handleAdminClick} />
-      <main>
+      <main className="bg-black">
         <Hero />
         <Identity />
-        <div className="bg-zinc-950 py-24 border-t border-zinc-900">
-          <div className="container mx-auto px-6">
-            <div className="flex items-center gap-4 mb-16">
-              <h2 className="text-4xl font-bold tracking-tighter uppercase">Portfolio</h2>
-              <div className="h-[1px] bg-zinc-800 flex-1 mt-2"></div>
+        
+        {/* Portfolio 섹션: 배경을 검은색으로 통일하여 Identity와 부드럽게 연결합니다. */}
+        <section id="portfolio" className="py-32 bg-black border-t border-white/5 scroll-mt-20">
+          <div className="container mx-auto px-8">
+            <div className="mb-20">
+              <span className="text-green-900 font-bold tracking-[0.3em] text-[10px] uppercase block mb-4">Our Works</span>
+              <h2 className="text-5xl font-bold tracking-tighter uppercase">Portfolio</h2>
             </div>
             <Portfolio portfolios={portfolios} />
           </div>
-        </div>
+        </section>
+        
         <Contact />
       </main>
       <Footer />
