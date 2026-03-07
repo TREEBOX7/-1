@@ -1,18 +1,17 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.0.5';
+export const DATA_VERSION = '1.0.6';
 
-// --- 여기서부터 끝까지 하나도 빠짐없이 복사하세요 ---
-
+// 넷리파이 에러(TS2339) 해결을 위해 데이터 구조를 'id', 'icon', 'desc', 'label'로 맞췄습니다.
 export const PROCESS_STEPS = [
-  { title: "Planning", description: "Design concept and structural planning" },
-  { title: "Modeling", description: "Detailed 3D geometry creation" },
-  { title: "Rendering", description: "High-quality lighting and texturing" }
+  { id: "1", icon: "📋", label: "Planning", desc: "Design concept and structural planning" },
+  { id: "2", icon: "🏗️", label: "Modeling", desc: "Detailed 3D geometry creation" },
+  { id: "3", icon: "🖥️", label: "Rendering", desc: "High-quality lighting and texturing" }
 ];
 
 export const PROMISES = [
-  { title: "Quality", description: "Uncompromising visual excellence" },
-  { title: "Deadline", description: "Strict adherence to project schedules" }
+  { id: "p1", icon: "✨", label: "Quality", desc: "Uncompromising visual excellence" },
+  { id: "p2", icon: "📅", label: "Deadline", desc: "Strict adherence to project schedules" }
 ];
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
