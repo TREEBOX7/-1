@@ -8,7 +8,7 @@ import { PortfolioItem } from './types';
  * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.2') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
  */
 
-export const DATA_VERSION = '1.0.2';
+export const DATA_VERSION = '1.0.3';
 
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
@@ -17,8 +17,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Exterior",
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다. 자연광의 유입과 그림자의 대비를 극대화하여 평온함을 표현했습니다.",
     "images": [
-      "여기에_복사한_이미지_주소_1",
-      "여기에_복사한_이미지_주소_2"
+      "https://postfiles.pstatic.net/MjAyNjAzMDdfMjU3/MDAxNzcyODYwNTg1MTUx.FF6Be8TLda-PKpCrYRmTYM9gTidKs6DMxRmwREXxqAwg.8ecyo1Dp6WKzxU8rcfTz1ySYuwRc1kKZtw1lMN92nc0g.JPEG/t-01-e.jpg?type=w773"
     ],
     "role": "Lead 3D Artist",
     "contribution": 100,
