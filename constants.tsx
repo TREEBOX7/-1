@@ -1,8 +1,7 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.0.6';
+export const DATA_VERSION = '1.0.7';
 
-// 넷리파이 에러(TS2339) 해결을 위해 데이터 구조를 'id', 'icon', 'desc', 'label'로 맞췄습니다.
 export const PROCESS_STEPS = [
   { id: "1", icon: "📋", label: "Planning", desc: "Design concept and structural planning" },
   { id: "2", icon: "🏗️", label: "Modeling", desc: "Detailed 3D geometry creation" },
