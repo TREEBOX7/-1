@@ -5,7 +5,7 @@ import { PortfolioItem } from './types';
  * 1. 관리자 페이지에서 사진을 모두 업로드합니다.
  * 2. 상단의 'EXPORT' 버튼을 눌러 JSON 파일을 다운로드합니다.
  * 3. 다운로드된 파일의 내용을 복사하며 아래 'INITIAL_PORTFOLIO' 배열 안에 붙여넣으세요.
- * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.2') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
+ * 4. 그런 다음 DATA_VERSION 숫자를 올리고(예: '1.0.3') GitHub에 푸시하면 모든 접속자에게 사진이 보입니다.
  */
 
 export const DATA_VERSION = '1.0.3';
