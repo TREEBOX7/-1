@@ -45,6 +45,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "description": "하이엔드 주거 공간을 위한 인테리어 CG입니다. 미니멀한 가구 배치와 빛의 굴절을 정교하게 계산하여 정적인 공간의 미학을 완성했습니다.",
     "images": [
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjI4/MDAxNzY4OTAyODgyNzYz.9L5TSJd6VoV5w0cm6GUGXmWWFdvf1cXFSNtNr1yjog.ti0tam1doryuqciDd1e3u8ydSvioJaLIjTXl-e4Vjngg.JPEG/t-01-e.jpg?type=w773",
+      https://postfiles.pstatic.net/MjAyNjAzMDdfMjU3/MDAxNzcyODYwNTg1MTUx.FF6Be8TLda-PKpCrYRmTYM9gTidKs6DMxRmwREXxqAwg.8ecyo1Dp6WKzxU8rcfTz1ySYuwRc1kKZtw1lMN92nc0g.JPEG/t-01-e.jpg?type=w773,
       "https://postfiles.pstatic.net/MjAyNjAxMjBfMjY5/MDAxNzY4OTAyODgzMTc0.IsuTmKKArToZQO7-EIkzXGC7xq8hB-LeCN9b4JeaTSog.D93LWxeXudBI-2XLv4-FVSYQBsciM1kkX74Dhsw99Dkg.JPEG/ca-04.jpg?type=w773"
     ],
     "role": "Lighting & Texturing",
