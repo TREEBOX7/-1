@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Identity from './components/Identity';
-import Showcase from './components/Showcase';
+import Showcase from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
