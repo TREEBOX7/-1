@@ -47,7 +47,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Interior",
     "description": "하이엔드 주거 공간을 위한 인테리어 CG입니다.",
     "images": [
-      "https://postfiles.pstatic.net/MjAyNjAxMjBfMTM4/MDAxNzM3NDA0OTgzNzY1.mJ8r7_D7v0y7w_Z7z0y7w_Z7z0y7w_Z7z0y7w_Z7z0y7w.jpg?type=w773"
+      "/test-3.jpg" 
     ],
     "role": "Interior Visualization",
     "contribution": 100,
