@@ -52,5 +52,17 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "role": "Interior Visualization",
     "contribution": 100,
     "result": "Interior Design Award"
+  },
+  {
+    "id": "4",
+    "title": "TEST_treebox1 Loft",
+    "category": "Exterior",
+    "description": "오리지널 최고의 건축 CG입니다.",
+    "images": [
+      "/test-6.jpg" 
+    ],
+    "role": "Interior Visualization",
+    "contribution": 100,
+    "result": "Interior Design Award"
   }
 ];
