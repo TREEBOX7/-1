@@ -19,7 +19,7 @@ export const PROMISES = [
 export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
     "id": "1",
-    "title": "The Timber Nexus Pavilion",
+    "title": "High-Rise Residential Complex",
     "category": "Exterior",
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다.",
     "images": [
@@ -31,7 +31,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   },
   {
     "id": "2",
-    "title": "Minimalist Monolith House",
+    "title": "Mixed-Use Tower View",
     "category": "Exterior",
     "description": "거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다.",
     "images": [
@@ -43,8 +43,8 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   },
   {
     "id": "3",
-    "title": "Zen Concrete Loft",
-    "category": "Interior",
+    "title": "Institutional Building Complex",
+    "category": "Exterior",
     "description": "하이엔드 주거 공간을 위한 인테리어 CG입니다.",
     "images": [
       "/test-3.jpg" 
@@ -55,7 +55,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   },
   {
     "id": "4",
-    "title": "TEST_treebox1 Loft",
+    "title": "Detailed Urban Diorama Model",
     "category": "Exterior",
     "description": "오리지널 최고의 건축 CG입니다.",
     "images": [
