@@ -35,7 +35,8 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Exterior",
     "description": "거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다.",
     "images": [
-      "https://postfiles.pstatic.net/MjAyNjAxMjBfMjM1/MDAxNzM3NDA0OTgzNzU5.IHs5grBd_7bb7X2wwCdYYBn2s8k8rsfNnyp-AMutmFEg.hJDTxzkORY2HGmZncPX7mEB21S0T4CqzOBdx4Yy-ZcYg.JPEG/Gemini_Generated_Image_19bth019bth019bt.jpg?type=w773"
+      "/t-02-e.jpg" 
+      "/t-02.jpg" 
     ],
     "role": "Environment Design",
     "contribution": 80,
