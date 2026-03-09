@@ -36,7 +36,6 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "description": "거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다.",
     "images": [
       "/t-02-e.jpg" 
-      "/t-02.jpg" 
     ],
     "role": "Environment Design",
     "contribution": 80,
