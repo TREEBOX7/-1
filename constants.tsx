@@ -60,7 +60,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "title": "Detailed Urban Diorama Model",
     "category": "Exterior", 
     "description": "건축을 2D로 표현하기 위한 최고의 블루프린트 AI이미지 입니다.",
-    "images": ["/test-10.jpg", "/test-9.jpg"],
+    "images": ["/test-9.jpg", "/test-10.jpg"],
     "role": "Interior Visualization",
     "contribution": 100,
     "result": "Interior Design Award"
