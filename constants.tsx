@@ -1,6 +1,6 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.1.6';
+export const DATA_VERSION = '1.1.7';
 
 export const PROCESS_STEPS = [
   { id: "1", icon: "📋", title: "Planning", desc: "Design concept and structural planning" },
@@ -58,7 +58,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
     "id": "5",
     "title": "Detailed Urban Diorama Model",
-    "category": "Exterior", // 'Blueprint' 에러를 피하기 위해 임시로 'Exterior'로 변경
+    "category": "Exterior", // 'Blueprint' 대신 'Exterior'로 수정하여 에러 해결
     "description": "건축을 2D로 표현하기 위한 최고의 블루프린트 AI이미지 입니다.",
     "images": ["/test-10.jpg", "/test-9.jpg"],
     "role": "Interior Visualization",
