@@ -71,7 +71,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   },
   {
     "id": "5",
-    "title": "Detailed Urban Diorama Model",
+    "title": "Architectural Blueprint",
     "category": "Blueprint",
     "description": "건축을 2D로 표현하기 위한 최고의 블루프린트 AI이미지 입니다.",
     "images": [
@@ -81,10 +81,10 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "role": "Interior Visualization",
     "contribution": 100,
     "result": "Interior Design Award"
-  }, // <-- 여기에 쉼표가 빠졌었습니다.
+  },
   {
-    "id": "6", // <-- ID를 6으로 변경했습니다 (중복 방지).
-    "title": "Detailed Urban Diorama Model",
+    "id": "6", 
+    "title": "A Library with a Soul",
     "category": "Interior",
     "description": "건축을 내부를 보여주기 위한 최고의 AI실내CG 입니다.",
     "images": [
