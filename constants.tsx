@@ -23,7 +23,8 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "category": "Exterior",
     "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다.",
     "images": [
-      "/t-01-e.jpg" 
+      "/t-01-e.jpg",
+      "/ca-04.jpg"
     ],
     "role": "Lead 3D Artist",
     "contribution": 100,
