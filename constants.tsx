@@ -30,7 +30,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "title": "Mixed-Use Tower View",
     "category": "Exterior",
     "description": "간단한 스케치업의 결과물로 만들어진 최상의 주상복합 AI건축CG 입니다.",
-    "images": ["/t-02-e.jpg", "/t-02.jpg"],
+    "images": ["/t-02-e.jpg", "/t-02.JPG"],
     "role": "Environment Design",
     "contribution": 80,
     "result": "AD Main Cover"
