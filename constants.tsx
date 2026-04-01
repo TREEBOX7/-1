@@ -1,15 +1,13 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.1.2';
+export const DATA_VERSION = '1.1.3';
 
-// Identity.tsx에서 사용하는 프로세스 데이터
 export const PROCESS_STEPS = [
   { id: "1", icon: "📋", title: "Planning", desc: "Design concept and structural planning" },
   { id: "2", icon: "🏗️", title: "Modeling", desc: "Detailed 3D geometry creation" },
   { id: "3", icon: "🖥️", title: "Rendering", desc: "High-quality lighting and texturing" }
 ];
 
-// Identity.tsx에서 사용하는 약속 데이터
 export const PROMISES = [
   { title: "Time", label: "Fast Delivery", desc: "AI 기반 프로세스로 압도적인 납기를 보장합니다." },
   { title: "Transparence", label: "Clear Process", desc: "모든 작업 과정은 투명하게 공유됩니다." },
@@ -66,9 +64,9 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "role": "Interior Visualization",
     "contribution": 100,
     "result": "Interior Design Award"
-  }, // <-- 이 쉼표가 아주 중요합니다!
+  },
   {
-    "id": "6", // <-- ID를 6으로 정확히 바꿨습니다.
+    "id": "6",
     "title": "Detailed Urban Diorama Model",
     "category": "Interior",
     "description": "건축을 내부를 보여주기 위한 최고의 AI실내CG 입니다.",
