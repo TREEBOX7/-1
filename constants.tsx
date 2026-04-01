@@ -21,7 +21,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "id": "1",
     "title": "High-Rise Residential Complex",
     "category": "Exterior",
-    "description": "지속 가능한 목재 구조와 유기적인 곡선을 결합한 미래형 파빌리온 시각화입니다.",
+    "description": "지속 가능한 콘크리트 와 저층 상가들과 어울리는 공동주택 AI건축CG 입니다.",
     "images": [
       "/t-01-e.jpg",
       "/ca-04.jpg"
@@ -34,9 +34,10 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "id": "2",
     "title": "Mixed-Use Tower View",
     "category": "Exterior",
-    "description": "거친 콘크리트 질감과 매끄러운 유리면이 조화를 이루는 독채 주택입니다.",
+    "description": "간단한 스케치업의 결과물로 만들어진 최상의 주상복합 AI건축CG 입니다.",
     "images": [
-      "/t-02-e.jpg" 
+      "/t-02-e.jpg",
+      "/t-02.jpg" 
     ],
     "role": "Environment Design",
     "contribution": 80,
@@ -46,9 +47,11 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "id": "3",
     "title": "Institutional Building Complex",
     "category": "Exterior",
-    "description": "하이엔드 주거 공간을 위한 인테리어 CG입니다.",
+    "description": "대리석과 유리골조로 만들어진 사옥 AI건축CG 입니다.",
     "images": [
-      "/test-3.jpg" 
+      "/test-3.jpg", 
+      "/test-4.jpg",
+      "/test-2.jpg"
     ],
     "role": "Interior Visualization",
     "contribution": 100,
@@ -58,9 +61,34 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "id": "4",
     "title": "Detailed Urban Diorama Model",
     "category": "Exterior",
-    "description": "오리지널 최고의 건축 CG입니다.",
+    "description": "최고의 사이트를 표현하기 위한 AI이미지 입니다.",
     "images": [
       "/test-6.jpg" 
+    ],
+    "role": "Interior Visualization",
+    "contribution": 100,
+    "result": "Interior Design Award"
+  },
+  {
+    "id": "5",
+    "title": "Detailed Urban Diorama Model",
+    "category": "Blueprint",
+    "description": "건축을 2D로 표현하기 위한 최고의 블루프린트 AI이미지 입니다.",
+    "images": [
+      "/test-10.jpg",
+      "/test-9.jpg" 
+    ],
+    "role": "Interior Visualization",
+    "contribution": 100,
+    "result": "Interior Design Award"
+  }
+   {
+    "id": "5",
+    "title": "Detailed Urban Diorama Model",
+    "category": "Interior",
+    "description": "건축을 내부를 보여주기 위한 최고의 AI실내CG 입니다.",
+    "images": [
+      "/test-5.jpg" 
     ],
     "role": "Interior Visualization",
     "contribution": 100,
