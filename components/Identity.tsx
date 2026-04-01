@@ -1,5 +1,5 @@
 import React from 'react';
-import { PROCESS_STEPS, PROMISES } from '../constants'; // .tsx 확장자 제거
+import { PROCESS_STEPS, PROMISES } from '../constants';
 
 const Identity: React.FC = () => {
   return (
