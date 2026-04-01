@@ -1,5 +1,5 @@
 import React from 'react';
-import { PROCESS_STEPS, PROMISES } from '../constants.tsx';
+import { PROCESS_STEPS, PROMISES } from '../constants';
 
 const Identity: React.FC = () => {
   return (
