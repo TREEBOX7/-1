@@ -1,6 +1,6 @@
 import { PortfolioItem } from './types';
 
-export const DATA_VERSION = '1.1.3';
+export const DATA_VERSION = '1.1.4';
 
 export const PROCESS_STEPS = [
   { id: "1", icon: "📋", title: "Planning", desc: "Design concept and structural planning" },
