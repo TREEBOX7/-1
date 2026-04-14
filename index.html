@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TReeBOX | Rooted & Unboxed</title>
-    <!-- Tailwind CSS (Build 시점에 처리되지만 개발 편의를 위해 CDN 유지 가능, 또는 Vite가 처리) -->
+    
+    <link rel="icon" type="image/jpeg" href="/logo2_mini.jpg" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <script>
@@ -34,7 +35,6 @@
         ::-webkit-scrollbar-track { background: #1A3C34; }
         ::-webkit-scrollbar-thumb { background: #C5A07D; border-radius: 4px; }
         
-        /* Premium Shadows */
         .box-shadow-premium {
             box-shadow: 0 40px 100px -20px rgba(26, 60, 52, 0.08);
         }
@@ -53,7 +53,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- Vite는 자동으로 이 경로를 해석하여 빌드합니다 -->
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>
