@@ -58,7 +58,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
   {
     "id": "5",
     "title": "Architectural Blueprint Model",
-    "category": "Exterior", 
+    "category": "Interior", 
     "description": "스케치업으로 모델링한 건축물을 2D로 표현하기 위한 최고의 블루프린트 AI이미지 입니다.",
     "images": ["/test-9.jpg", "/test-10.jpg"],
     "role": "Lead 2D Artist",
