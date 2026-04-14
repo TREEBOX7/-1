@@ -50,7 +50,7 @@ export const INITIAL_PORTFOLIO: PortfolioItem[] = [
     "title": "Detailed Urban Diorama Model",
     "category": "Exterior",
     "description": "최고의 사이트를 표현하기 위한 AI이미지 입니다.",
-    "images": ["/test-6.jpg"],
+    "images": ["/test-6.jpg", "/test-6_1.jpg"],
     "role": "Interior Visualization",
     "contribution": 100,
     "result": "Interior Design Award"
